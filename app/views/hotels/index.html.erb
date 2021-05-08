@@ -1,0 +1,35 @@
+<% if user_signed_in? %>
+<h3 class="mt-1 mb-3 header-center pd-top40">宿　一覧</h3>
+<% else %>
+<h3 class="mt-1 mb-3 header-center pd-top40">予約や詳細の確認はログイン後にできます</h3>
+<% end %>
+<div class="input-box">
+  <input type="text" class="input-text" placeholder="キーワードを入力">
+</div>
+
+<div class="hotels-cord">
+  <% @hotels.each do |hotel| %>
+  
+  <!-- 宿情報表示部 -->
+  <div class="card hotels-cord-img" style="margin: 20px; width: 18rem;">
+    <image src="<%= hotel.image %>" class="card-img-top" >
+    <div class="card-body">
+      <h5 class="card-title"><%= hotel.name %></h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= hotel.prefectures_name %><%= hotel.address_city %></li>
+        <li class="list-group-item">一泊一人　¥ <%= hotel.price %></li>
+      </ul>
+      <% if user_signed_in? %>
+      <%= link_to "詳細を見る", hotel_path(hotel.id), {class: "btn btn-primary"} %>
+      <% end %>
+    </div>
+    <!-- real_time_filter  -->
+    <div class="keyword-list">
+      <p><%= hotel.name %></p>
+      <p><%= hotel.postcode%></p>
+      <p><%= hotel.prefectures_name%></p>
+      <p><%= hotel.address_city%></p>
+    </div>
+  </div>
+  <% end %>
+</div>

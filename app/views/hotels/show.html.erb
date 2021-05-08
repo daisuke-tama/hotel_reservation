@@ -1,0 +1,35 @@
+  <div class="card col-sm-6 mx-auto mt-5">
+    <div class="card-body">
+      <h3 class="mt-1 mb-3 header-center">宿　詳細</h3>
+      
+      <div class="edit-icon">
+        <% if @hotel.image.blank? %>
+         <p>現在登録中の画像はありません</p>
+        <% else %>
+         <image src="<%= @hotel.image %>" class="edit-icon-image">
+        <% end %>
+      </div>
+      
+      <ul class="list-group">
+        <li class="list-group-item">一泊一人の料金　　　:　<%= @hotel.price %></li>
+        <li class="list-group-item">宿の名前　　　　　　:　<%= @hotel.name %></li>
+        <li class="list-group-item">電話番号　　　　　　:　<%= @hotel.tel %></li>
+        <li class="list-group-item">郵便番号　　　　　　:　<%= @hotel.postcode %></li>
+        <li class="list-group-item">都道府県　　　　　　:　<%= @hotel.prefectures_name %></li>
+        <li class="list-group-item">市区町村　　　　　　:　<%= @hotel.address_city %></li>
+        <li class="list-group-item">番地　　　　　　　　:　<%= @hotel.address_street %></li>
+        <li class="list-group-item">建物名　　　　　　　:　<%= @hotel.address_building %></li>
+        <li class="list-group-item">宿の紹介文　　　　　:　<%= @hotel.memo %></li>
+      </ul>
+      
+      <div class="btn-login">
+        <div class="actions">
+          <% if @hotel.user_id == current_user.id %>
+            <%= link_to "宿の情報を編集する場合はこちら", edit_hotel_path , :class => "btn btn-primary" %>
+          <% end %>
+          <%= link_to "この宿を予約する", new_hotel_reservation_path(@hotel.id), :class => "btn btn-primary" %>
+        </div>
+      </div>
+      
+    </div>
+  </div>

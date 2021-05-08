@@ -1,0 +1,55 @@
+  <% if @reservations.blank? %>
+    <h1 class="reservations-header">予約済みの宿はありません</h1>
+    <div>
+      <div class="panel-heading"><h3>宿を一覧から探す</h3></div>
+      <div style="text-align: center;">
+        <a href="/hotels" class="btn btn-outline-info" style="width: 60%;">宿一覧へ</a>
+      </div>
+    </div>
+    
+  <% else %>
+  <% @reservations.each do |reservation| %>
+    <h1 class="reservations-header">予約した宿の一覧</h1>
+      <div class="reservations-card">
+        <!-- 宿情報表示部 -->
+        <div class="card" style="margin: 0 auto; width: 40rem;">
+          <image src="<%= @hotels.find_by(id: reservation[:hotel_id]).image %>" class="card-img-top" >
+          <div class="card-body">
+            <p class="reservations-list-item-header">予約した宿の情報</p>
+            <h5 class="card-title"><%= @hotels.find_by(id: reservation[:hotel_id]).name %></h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><%= @hotels.find_by(id: reservation[:hotel_id]).prefectures_name %><%= @hotels.find_by(id: reservation[:hotel_id]).address_city %></li>
+              <li class="list-group-item">一泊一人　¥ <%= @hotels.find_by(id: reservation[:hotel_id]).price %></li>
+            </ul>
+            <!--  予約内容表示部  -->
+            <p class="reservations-list-item-header">予約内容</p>
+            <ul class="list-group list-group-horizontal list-group-width">
+              <li class="list-group-item">予約日</li>
+              <li class="list-group-item"><%= reservation.when_to.strftime('%Y/%m/%d (%a)') %></li>
+            </ul>
+            <ul class="list-group list-group-horizontal list-group-width">
+              <li class="list-group-item">チェックイン時間</li>
+              <li class="list-group-item"><%= reservation.check_in.strftime('%H:%M') %></li><!--  time_selectで取得したデータの時間部分のみ表示  -->
+            </ul>
+            <ul class="list-group list-group-horizontal list-group-width">
+              <li class="list-group-item">利用人数</li>
+              <li class="list-group-item"><%= reservation.many_people %></li>
+            </ul>
+            <ul class="list-group list-group-horizontal list-group-width">
+              <li class="list-group-item">利用泊数</li>
+              <li class="list-group-item"><%= reservation.many_night %></li>
+            </ul>
+            <ul class="list-group list-group-horizontal list-group-width">
+              <li class="list-group-item">合計金額</li>
+              <li class="list-group-item"><%= reservation.amount %></li>
+            </ul>
+            <div class="btn-login">
+              <div class="actions">
+                <%= link_to "キャンセルする", "/hotels/#{reservation.hotel_id}/reservations/#{reservation.id}", method: :delete%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>

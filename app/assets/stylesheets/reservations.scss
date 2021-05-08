@@ -1,0 +1,82 @@
+.reservation-header {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.new-reservation .list-group-item {
+    width: 800px;
+    margin: 0 auto;
+}
+.reservation-flex-box {
+    display: flex;
+}
+.reservation-flex-box .list-group {
+    margin-top: 3rem !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+ .reservation-flex-box .card {
+     width : 300px;
+ }
+ 
+ .list-group h3 {
+    margin: 0 auto;
+ }
+ 
+.check-reservation-header {
+    text-align : center;
+    margin-top : 20px;
+}
+ 
+ .check-reservation-container {
+     margin : 30px;
+ }
+ 
+ .check-reservation-items-header {
+     text-align : center;
+ }
+ .check-reservation-items .list-group-item {
+     width : 100%;
+ }
+ 
+ .check-reservation-list-items {
+     margin : 30px;
+     width : 40%;
+ }
+ 
+ .margintop-center {
+     margin-top : 250px;
+ }
+ 
+ .list-group-width li:nth-child(odd) {
+    width : 45%;
+ }
+ .list-group-width li:nth-child(even) {
+    width : 55%;
+    text-align : center;
+ }
+ 
+ .btn-check-reservation {
+    text-align : center;
+    margin-top : 60px;
+ }
+ .btn-check-reservation input {
+    width : 400px;
+ }
+ 
+ .reservations-header {
+    text-align: center;
+    margin-top: 20px;
+ }
+ 
+ .reservations-card {
+    margin-top: 30px;
+    margin-bottom: 80px;
+ }
+ 
+.reservations-list-item-header {
+    text-align : center;
+    font-weight : bold;
+    font-size : 15px;
+    border-bottom : 2px solid gray;
+}

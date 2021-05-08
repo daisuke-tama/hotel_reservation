@@ -1,0 +1,26 @@
+<h3 class="mt-1 mb-3 header-center">宿　検索</h3>
+
+<div class="search-word">
+<h2>検索ワード　[<%= @search_word %>]</h2>
+<p>※検索ワードがない場合はすべての宿が表示されます</p>
+</div>
+
+<div class="hotels-cord">
+  <% @hotels.each do |hotel| %>
+  <div class="card" style="margin: 20px; width: 18rem;">
+    <image src="<%= hotel.image %>" class="card-img-top" >
+    <div class="card-body">
+      <h5 class="card-title"><%= hotel.name %></h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= hotel.prefectures_name %><%= hotel.address_city %></li>
+        <li class="list-group-item">一泊一人　¥ <%= hotel.price %></li>
+      </ul>
+      <%= link_to "詳細を見る", hotel_path(hotel.id), {class: "btn btn-primary"} %>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+  <div class="actions btn-back">
+    <%= link_to "戻る", :back, :class => "btn btn-primary" %>
+  </div>
