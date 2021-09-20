@@ -1,0 +1,135 @@
+  <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+      <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+      <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/japan.jpg">
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <% if user_signed_in? %>
+            <h1>宿を検索しよう！</h1>
+            <p>検索して宿を予約してみよう！</p>
+            <p><%= link_to "検索ページへ", hotels_path, {class: "btn btn-lg btn-primary btn-search"} %>
+            <% else %>
+            <h1>オーナーが提供する宿に泊まろう！</h1>
+            <p>まずは会員登録！(会員登録をしないとサービスの利用はできません)</p>
+            <p><a class="btn btn-lg btn-primary" href="/users/sign_up" role="button">会員登録をする</a></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/paragliding.jpg">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>自身がオーナーとなり、ユーザーに宿を提供しましょう！</h1>
+            <p>会員登録後、簡単に貸し出すことができます！</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/project.jpg">
+        <div class="container">
+          <div class="carousel-caption text-end">
+            <h1>ご希望のエリアやキーワードで宿が探せます！</h1>
+            <p>宿の名前や住所で検索してみよう</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+  
+  <% if user_signed_in? %>
+  <h1 class="input-form-header">理想のロケーションを探そう！</h1>
+  <div class="contents-tidy input-form">
+    <div class="container-sm keyword-search">
+      <div>
+        <div class="panel-heading"><h3>宿を一覧から探す</h3></div>
+        <div style="text-align: center;">
+          <a href="/hotels" class="btn btn-outline-info" style="width: 60%;">宿一覧へ</a>
+        </div>
+      </div>
+      <div class="panel panel-default m-top80">
+        <div class="panel-heading"><h3>宿をキーワードで検索する</h3></div>
+        <div class="panel-body m-top10">
+            <div class="form-group has-error">
+              <div class="col-sm-10" style="margin-left: auto;">
+                <%= form_with url: "hotels/index_keyword_search", local: true, method: :get do |f| %>
+                  <%= f.text_field :search, :placeholder => "キーワードを入力してください", style: "width: 60%;"%>
+                  <%= f.submit '検索する', :name => nil, :class => "btn btn-primary" %>
+                <% end %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--  japan map  -->
+    <div class="map-header">
+      <h3 class="map-container-header">地図から探す</h3>
+      <div id="map-container"></div>
+    　<p class="map-footer"></p>
+    </div>
+  </div>
+  
+  <% else %>
+  <h1 class="input-form-header">試しにどんな宿があるか見てみましょう</h1>
+  <div class="contents-tidy input-form">
+    <div class="container-sm keyword-search">
+      <div>
+        <div class="panel-heading"><h3>宿を一覧から見てみる</h3></div>
+        <div style="text-align: center;">
+          <a href="/hotels" class="btn btn-outline-info" style="width: 60%;">宿一覧へ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  
+  <!-- START THE FEATURETTES -->
+  <div class="content-width">
+    
+    <hr class="featurette-divider">
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">自然豊かな宿で<span class="text-muted">リフレッシュ</span>しましょう！</h2>
+        <p class="lead">たまにはゆっくりとしましょう</p>
+      </div>
+      <div class="col-md-5">
+        <img src="assets/project.jpg">
+      </div>
+    </div>
+    
+    <hr class="featurette-divider">
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">使わない間の無駄な時間を<span class="text-muted">自身が宿のオーナーとなり</span>有効に活用しましょう！</h2>
+        <p class="lead">登録は簡単！すぐに宿のオーナーになりましょう</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img src="assets/japan.jpg">
+      </div>
+    </div>
+    
+    <hr class="featurette-divider">
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">簡単検索！<span class="text-muted">好みの宿を探しましょう！</span></h2>
+        <p class="lead">理想の宿を探しましょう</p>
+      </div>
+      <div class="col-md-5">
+        <img src="assets/nagasaki.jpg">
+      </div>
+    </div>
+  </div>

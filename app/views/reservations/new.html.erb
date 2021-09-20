@@ -1,0 +1,130 @@
+<!--  入力が完了するまで送信ボタンを無効化する  -->
+<script src="submit.js"></script>
+
+<!--   新規予約画面  -->
+<% if @reservation.confirming.blank? %>
+  <!--  予約する宿の情報の表示  -->
+  <h1 class="reservation-header">新規予約</h1>
+  
+  <div class="edit-icon">
+    <% if @hotel.image.blank? %>
+     <p>宿の画像はありません</p>
+    <% else %>
+     <image src="<%= @hotel.image %>" class="edit-icon-image">
+    <% end %>
+  </div>
+  <div class="reservation-flex-box">
+    <ul class="list-group new-reservation">
+      <h3>予約しようとしている宿の情報</h3>
+      <li class="list-group-item">一泊一人の料金　　　:　<%= @hotel.price %></li>
+      <li class="list-group-item">宿の名前　　　　　　:　<%= @hotel.name %></li>
+      <li class="list-group-item">電話番号　　　　　　:　<%= @hotel.tel %></li>
+      <li class="list-group-item">郵便番号　　　　　　:　<%= @hotel.postcode %></li>
+      <li class="list-group-item">都道府県　　　　　　:　<%= @hotel.prefectures_name %></li>
+      <li class="list-group-item">市区町村　　　　　　:　<%= @hotel.address_city %></li>
+      <li class="list-group-item">番地　　　　　　　　:　<%= @hotel.address_street %></li>
+      <li class="list-group-item">建物名　　　　　　　:　<%= @hotel.address_building %></li>
+    </ul>
+    
+    <div class="card col-sm-6 mx-auto mt-5">
+      <div class="card-body">
+        <h3 class="mt-1 mb-3 header-center">新規予約</h3>
+          
+        <%= form_with model: [@hotel, @reservation] do |f| %><!--  ネストされているため、配列でモデルを指定  -->
+          <div class="form-floating mb-3">
+            <%= f.number_field :many_night, min: 1, max: 30, autofocus: true, autocomplete: "many_night", :class => "form-control", :id => "floatingInput", :placeholder => "泊数", :id => "input_0" %>
+            <%= f.label :many_night, "泊数(1日~30日まで)", :class => "form-label" %>
+          </div>
+          <div class="form-floating mb-3">
+            <%= f.number_field :many_people, min: 1, max: 6, autocomplete: "many_people", :class => "form-control", :id => "floatingInput", :placeholder => "利用人数", :id => "input_1" %>
+            <%= f.label :many_people, "利用人数(1人~6人まで)", :class => "form-label" %>
+          </div>    
+          <div class="form-floating mb-3">
+            <%= f.date_field :when_to, autocomplete: "when_to", :class => "form-control", :id => "floatingInput", :placeholder => "利用日", :id => "input_2" %>
+            <%= f.label :when_to, "利用日", :class => "form-label " %>
+          </div>
+          <div class="form-floating mb-3">
+            <%= f.time_field :check_in, autocomplete: "check_in", :class => "form-control", :id => "floatingInput", :placeholder => "チェックインする時間", :id => "input_3" %>
+            <%= f.label :check_in, "チェックインする時間", :class => "form-label" %>
+          </div>
+          
+          <div class="btn-login">
+            <div class="actions">
+              <%= f.submit "予約確認画面へ", :class => "btn btn-primary btn-send", :id => "sending" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<!--  予約確認画面  -->
+<% else %>
+
+  <h1 class="check-reservation-header">予約の確認</h1>
+  <h5 class="check-reservation-header text-red">注）まだ予約が完了しておりません。<br>ページ下部のボタンをクリックすると予約が完了します</h5>
+  <!--  宿の情報  -->
+  <div class="contents-tidy">
+    <div class="card check-reservation-container" style="width: 30rem;">
+      <% if @hotel.image.blank? %>
+       <p>宿の画像はありません</p>
+      <% else %>
+       <image src="<%= @hotel.image %>" class="card-img-top">
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title check-reservation-items-header">予約する宿の情報</h5>
+        <ul class="list-group check-reservation-items">
+          <li class="list-group-item">一泊一人の料金　　　:　<%= @hotel.price %></li>
+          <li class="list-group-item">宿の名前　　　　　　:　<%= @hotel.name %></li>
+          <li class="list-group-item">電話番号　　　　　　:　<%= @hotel.tel %></li>
+          <li class="list-group-item">郵便番号　　　　　　:　<%= @hotel.postcode %></li>
+          <li class="list-group-item">都道府県　　　　　　:　<%= @hotel.prefectures_name %></li>
+          <li class="list-group-item">市区町村　　　　　　:　<%= @hotel.address_city %></li>
+          <li class="list-group-item">番地　　　　　　　　:　<%= @hotel.address_street %></li>
+          <li class="list-group-item">建物名　　　　　　　:　<%= @hotel.address_building %></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!--  予約内容  -->
+    <div class="check-reservation-list-items">
+      <div class="margintop-center"></div>
+        <h5 class="check-reservation-items-header">予約内容</h5>
+        <ul class="list-group list-group-horizontal list-group-width">
+          <li class="list-group-item">予約日</li>
+          <li class="list-group-item"><%= @reservation.when_to.strftime('%Y/%m/%d (%a)') %></li><!--  西暦/月/日/ 曜日 -->
+        </ul>
+        <ul class="list-group list-group-horizontal list-group-width">
+          <li class="list-group-item">チェックイン時間</li>
+          <li class="list-group-item"><%= @reservation.check_in.strftime('%H:%M') %></li><!--  時間:分  -->
+        </ul>
+        <ul class="list-group list-group-horizontal list-group-width">
+          <li class="list-group-item">利用人数</li>
+          <li class="list-group-item"><%= @reservation.many_people %></li>
+        </ul>
+        <ul class="list-group list-group-horizontal list-group-width">
+          <li class="list-group-item">利用泊数</li>
+          <li class="list-group-item"><%= @reservation.many_night %></li>
+        </ul>
+        <ul class="list-group list-group-horizontal list-group-width">
+          <li class="list-group-item">合計金額</li>
+          <li class="list-group-item"><%= @reservation.amount %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="btn-check-reservation">
+    <div class="actions">
+      <%= form_with model: [@hotel, @reservation] do |f| %>
+      <%= f.hidden_field :when_to, :value => @reservation.when_to %>
+      <%= f.hidden_field :check_in, :value => @reservation.check_in %>
+      <%= f.hidden_field :many_people, :value => @reservation.many_people %>
+      <%= f.hidden_field :many_night, :value => @reservation.many_night %>
+      <%= f.hidden_field :amount, :value => @reservation.amount %>
+      <%= f.hidden_field :confirming, :value => @reservation.confirming %>
+      <%= f.submit "予約を確定する", :class => "btn btn-outline-success" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

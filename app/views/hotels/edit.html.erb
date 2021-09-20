@@ -1,0 +1,64 @@
+<div class="card col-sm-6 mx-auto mt-5">
+  <div class="card-body">
+    <h3 class="mt-1 mb-3 header-center">宿の編集</h3>
+      
+    <%= form_with model: @hotel do |f| %>
+      <div class="form-floating mb-3">
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", :class => "form-control", :id => "floatingInput", :placeholder => "宿の名前" %>
+        <%= f.label :name, "宿の名前", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :tel, autocomplete: "tel", :class => "form-control", :id => "floatingInput", :placeholder => "電話番号"  %>
+        <%= f.label :tel, "電話番号", :class => "form-label" %>
+      </div>    
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :postcode, autocomplete: "postcode", :class => "form-control", :id => "floatingInput", :placeholder => "郵便番号"  %>
+        <%= f.label :postcode, "郵便番号", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.collection_select :prefectures_name, JpPrefecture::Prefecture.all, :name, :name, { prompt: '選択してください' }, :class => "form-control", :id => "floatingInput", :placeholder => "都道府県" %>
+        <%= f.label :prefectures_name, "都道府県", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :address_city, autocomplete: "address_city", :class => "form-control", :id => "floatingInput", :placeholder => "市区町村"  %>
+        <%= f.label :address_city, "市区町村", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :address_street, autocomplete: "address_street", :class => "form-control", :id => "floatingInput", :placeholder => "番地"  %>
+        <%= f.label :address_street, "番地", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :address_building, autocomplete: "address_building", :class => "form-control", :id => "floatingInput", :placeholder => "建物名"  %>
+        <%= f.label :address_building, "建物名(マンション名など）", :class => "form-label" %>
+      </div>
+  
+      <div class="mb-3">
+        <%= f.label :image, "宿の画像を選んでください（変更しない場合は空欄のままにしてください）", :class => "form-label" %>
+        <%= f.file_field :image, autocomplete: "image", :class => "form-control", :type => "file", :id => "formFile" %>
+      </div>
+      
+      <div class="form-floating mb-3 bottom-space">
+        <%= f.text_area :memo, autocomplete: "memo", :class => "form-control", :id => "floatingTextarea2", :placeholder => "宿の紹介文", style: "height: 200px" %>
+        <%= f.label :memo, "宿の紹介文を記入してください(300字以内)", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :price, autofocus: true, autocomplete: "price", :class => "form-control", :id => "floatingInput", :placeholder => "一泊の料金" %>
+        <%= f.label :price, "一泊の料金", :class => "form-label" %>
+      </div>
+      
+      <div class="btn-login">
+        <%= link_to '削除する', "/hotels/#{params[:id]}", :class => "btn btn-danger", method: :delete %>
+        <div class="actions">
+          <%= f.submit "宿情報を編集する", :class => "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
