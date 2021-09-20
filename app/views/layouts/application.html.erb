@@ -1,14 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <title>HotelReservation</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="jquery.japan-map.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
   </head>
 
   <body>
+    
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand site-header-logo" href="/">宿泊予約サイト</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mb-2 mb-md-0">
+              <% if user_signed_in? %>
+                <div class="icon-box">
+                  <div class="icon-image-resize">
+                    <% if current_user.icon.blank? %>
+                    <image src="assets/bicycle.svg" style="background-color: white;">
+                    <% else %>
+                    <image src="<%= current_user.icon %>" >
+                    <% end %>
+                  </div>
+                  <div class="icon-name">
+                    <%= current_user.name %>
+                  </div>
+                </div>
+                <li class="nav-item active">
+                  <%= link_to "宿一覧", hotels_path, {class: "nav-link"} %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to "宿予約一覧", "/reservations/#{current_user.id}/index", {class: "nav-link"} %>
+                </li>                  
+                <li class="nav-item">
+                  <%= link_to "宿の登録", new_hotel_path, {class: "nav-link"} %>
+                </li>                
+                <li class="nav-item">
+                  <%= link_to "会員情報詳細", user_path(current_user), {class: "nav-link"} %>
+                </li>                
+                <li class="nav-item">
+                  <%= link_to "会員情報変更", edit_user_registration_path, {class: "nav-link"} %>
+                </li>                  
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_user_session_path(id: current_user.id), {class: "nav-link"} %>
+                </li>
+               
+              <% else %>
+                <li class="nav-item active">
+                  <%= link_to "新規登録", new_user_registration_path, {class: "nav-link"} %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_user_session_path, {class: "nav-link"} %>
+                </li>
+              <% end %>
+            </ul>
+            <!--<form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="検索ワードを入力" aria-label="検索">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>-->
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <% if flash[:notice] %>
+      <div class="flash-container">
+        <div class="flash">
+          <%= flash[:notice] %>
+        </div>
+      </div>
+    <% end %>
+    
     <%= yield %>
+    
+    <!-- FOOTER -->
+    <footer>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mb-2 mb-md-0">
+              <li class="nav-item active">
+                <%= link_to "トップページへ戻る", root_path, {class: "nav-link"} %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </footer>
+    
+    <script src="bootstrap.bundle.min.js"></script>
+    <script src="japan-map.js"></script>
+    <script type="text/javascript" src="real_time_filter.js"></script>
+    
   </body>
 </html>

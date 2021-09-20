@@ -1,0 +1,219 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self 
+ */
+
+
+@import "bootstrap";
+
+/*  Bootstrap core CSS  */
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+        
+    }
+}
+
+body {
+    padding-bottom : 0;
+}
+
+ul {
+  list-style : none;
+}
+
+.contents-tidy {
+    display: flex;
+    justify-content : center;
+}
+
+.content-width {
+  padding-left : 50px;
+  padding-right : 50px;
+  margin-left : auto;
+  margin-right : auto;
+  position : relative;
+}
+
+/*  header  */
+.site-header-logo {
+    margin-left : 30px;
+}
+
+/*  flash  */
+.flash-container {
+  width : 100%;
+  position: absolute;
+  z-index: 10;
+  top: 64px;
+  border-radius: 0 0 2px 2px;
+}
+.flash {
+  margin : 0 auto;
+  padding: 10px 0;
+  color: white;
+  background: rgba(192,192,192,0.8);
+  text-align: center;
+  width: 600px;
+  font-size: 20px;
+  font-weight : bold;
+}
+
+/*   icon   */
+.icon-box {
+    display : flex;
+}
+.icon-image-resize {
+    border-radius : 50px;
+    overflow : hidden;
+}
+.icon-image-resize img {
+    width : 40px;
+    height : 40px;
+    object-fit : cover;
+}
+.icon-name {
+    padding-left: 10px;
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+/*edit icon*/
+.edit-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.edit-icon-image {
+    border-radius: 50px;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+}
+.edit-icon p {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/*  input-form */
+.input-form-header {
+    text-align : center;
+    color : black;
+    margin-bottom : 40px;
+}
+.input-form {
+    margin-left : 200px;
+    margin-right : 200px;
+}
+.keyword-search{
+    min-width : 380px;
+}
+
+/*  map-container  */
+.map-header {
+    text-align : center;
+}
+.map-footer {
+    text-align : center;
+}
+
+/*  registrations new  */
+
+.header-center {
+    text-align : center;
+}
+.form-group {
+    margin-bottom : 20px;
+}
+.btn-login {
+    display : flex;
+    margin-top : 80px;
+}
+.btn-login .actions {
+    margin-left : auto;
+}
+
+
+.text-red {
+    color : red;
+    font-weight : bold;
+}
+
+.bottom-space {
+    padding-bottom : 40px;
+}
+
+/*  real_time_filter  */
+.input-box {
+    text-align: center;
+}
+.input-text {
+    width : 400px;
+}
+.keyword-list {
+    display : none;
+}
+
+
+.col-md-5 img {
+    width : 500px;
+    height : 500px;
+}
+
+.panel-heading h3 {
+    text-align : center;
+}
+.m-top10 {
+    margin-top : 10px;
+}
+.m-top80 {
+    margin-top : 80px;
+}
+.pd-top40 {
+    padding-top : 40px;
+}
+.under-line {
+    border-top: 1px solid red;
+    padding-bottom: 60px;
+}
+
+.btn-search {
+    width : 250px;
+}
+
+
+/*  送信ボタンの無効化時の見た目  */
+.btn-send[disabled] {
+  background-color: gray;
+  cursor: not-allowed;
+  opacity : 0.3;
+}
+
+/*  footer  */
+footer {
+    margin-top : 100px;
+}

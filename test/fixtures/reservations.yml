@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  many_night: 1
+  many_people: 1
+  when_to: 1
+  check_in: 1
+  amount: 1
+
+two:
+  many_night: 1
+  many_people: 1
+  when_to: 1
+  check_in: 1
+  amount: 1

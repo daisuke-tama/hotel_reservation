@@ -1,0 +1,99 @@
+<!--  user情報変更  -->
+
+<div class="card col-sm-6 mx-auto mt-5">
+  <div class="card-body">
+    <h3 class="mt-1 mb-3 header-center">登録情報変更</h3>
+    
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", :class => "form-control", :id => "floatingInput", :placeholder => "氏名" %>
+        <%= f.label :name, "氏名", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :ruby, autocomplete: "ruby", :class => "form-control", :id => "floatingInput", :placeholder => "フリガナ"  %>
+        <%= f.label :ruby, "フリガナ", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :tel, autocomplete: "tel", :class => "form-control", :id => "floatingInput", :placeholder => "電話番号"  %>
+        <%= f.label :tel, "電話番号", :class => "form-label" %>
+      </div>    
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :postcode, autocomplete: "postcode", :class => "form-control", :id => "floatingInput", :placeholder => "郵便番号"  %>
+        <%= f.label :postcode, "郵便番号", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, :class => "form-control", :id => "floatingInput", :placeholder => "都道府県", autocomplete: "prefecture_code" %>
+        <%= f.label :prefecture_name, "都道府県", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :address_city, autocomplete: "address_city", :class => "form-control", :id => "floatingInput", :placeholder => "市区町村"  %>
+        <%= f.label :address_city, "市区町村", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :address_street, autocomplete: "address_street", :class => "form-control", :id => "floatingInput", :placeholder => "番地"  %>
+        <%= f.label :address_street, "番地", :class => "form-label" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_field :address_building, autocomplete: "address_building", :class => "form-control", :id => "floatingInput", :placeholder => "建物名"  %>
+        <%= f.label :address_building, "建物名(マンション名など）", :class => "form-label" %>
+      </div>
+    
+      <div class="form-floating mb-3">
+        <%= f.text_field :email, autocomplete: "email", :class => "form-control", :id => "floatingInput", :placeholder => "メールアドレス"  %>
+        <%= f.label :email, "メールアドレス", :class => "form-label" %><br />
+      </div>
+    
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+      
+      <div class="edit-icon">
+        <image src="<%= current_user.icon %>" class="edit-icon-image">
+        <p>現在のアイコン</p>
+      </div>
+      
+      <p class="notice-text">アイコンを変更しない場合はファイルを選択しないでください</p>
+      <div class="mb-3">
+        <%= f.label :icon, "新たにアイコンに使用する画像を選んでください(変更しない場合は無記入)", :class => "form-label" %>
+        <%= f.file_field :icon, autocomplete: "icon", :class => "form-control", :type => "file", :id => "formFile" %>
+      </div>
+      
+      <div class="form-floating mb-3">
+        <%= f.text_area :introduction, autocomplete: "introduction", :class => "form-control", :id => "floatingTextarea2", :placeholder => "自己紹介", style: "height: 200px" %>
+        <%= f.label :introduction, "自己紹介(300字以内)", :class => "form-label" %>
+      </div>
+    
+      <p class="notice-text">パスワードを変更しない場合は下記2項目を記入しないでください</p>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :id => "floatingInput", :placeholder => "パスワードを入力してください"  %>
+        <%= f.label :password, "ご希望のパスワードを入力してください (6文字以上、20文字以内で入力してください)", :class => "form-label"  %> <br />
+      </div>
+    
+      <div class="form-floating mb-3">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :id => "floatingInput", :placeholder => "もう一度パスワードを入力してください" %>
+        <%= f.label :password_confirmation, "確認のためもう一度パスワードを入力してください", :class => "form-label"  %><br /> 
+      </div>
+      
+      <div class="under-line"></div>
+    
+      <div class="form-floating mb-3">
+        <%= f.password_field :current_password, autocomplete: "current-password", :class => "form-control", :id => "floatingInput", :placeholder => "確定するために現在のパスワードを入力してください"  %>
+        <%= f.label :current_password, "確定するために現在のパスワードを入力してください" %><br />
+      </div>
+    
+      <div class="actions" style="text-align: end;">
+        <%= f.submit "会員情報を変更する", :class => "btn btn-primary"  %>
+      </div>
+    <% end %>
+    
+  </div>
+</div>
